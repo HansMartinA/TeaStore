@@ -1,16 +1,3 @@
-/**
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package tools.descartes.teastore.persistence.rest;
 
 import javax.ws.rs.DELETE;
@@ -20,55 +7,78 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import tools.descartes.teastore.persistence.repository.CacheManager;
-
-/**
- * REST endpoint for cache clearing.
- * @author Joakim von Kistowski
- */
 @Path("cache")
 @Produces("text/plain")
 public final class CacheManagerEndpoint {
+@DELETE
+@Path("/class/{class}")
+public  Response clearClassCache(@PathParam("class")
+final String className) {
+cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController threadMonitoringController = cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController.getInstance();
+cipm.consistency.bridge.monitoring.controller.ServiceParameters monitoringServiceParameters = new  cipm.consistency.bridge.monitoring.controller.ServiceParameters();
+monitoringServiceParameters.addValue("className", className);
+threadMonitoringController.enterService("_p_zTMQsxEey1ZNZ-8Luqpw", this, monitoringServiceParameters);
+try {
+threadMonitoringController.enterInternalAction("_p_z6QAsxEey1ZNZ-8Luqpw", "_oro4gG3fEdy4YaaT-RYrLQ");
+boolean classfound = true;
+try {
+Class<?> entityClass = Class.forName(className);
+CacheManager.MANAGER.clearLocalCacheOnly(entityClass);
+}
+catch(Exception e){
+classfound = false;
+}
+if (classfound)
+{
+return Response.ok(className).build();
+}
+Response longAndUniqueNameToAvoidDuplicationsAndCompilationErrors16305069492980012345690282551347 = Response.status(Status.NOT_FOUND).build();
+threadMonitoringController.exitInternalAction("_p_z6QAsxEey1ZNZ-8Luqpw", "_oro4gG3fEdy4YaaT-RYrLQ");
+return longAndUniqueNameToAvoidDuplicationsAndCompilationErrors16305069492980012345690282551347;
+}
+finally {
+threadMonitoringController.exitService("_p_zTMQsxEey1ZNZ-8Luqpw");
+}
+}
 
-	/**
-	 * Clears the cache for the class.
-	 * @param className fully qualified class name.
-	 * @return Status Code 200 and cleared class name if clear succeeded, 404 if it didn't.
-	 */
-	@DELETE
-	@Path("/class/{class}")
-	public Response clearClassCache(@PathParam("class") final String className) {
-		boolean classfound = true;
-		try {
-			Class<?> entityClass = Class.forName(className);
-			CacheManager.MANAGER.clearLocalCacheOnly(entityClass);
-		} catch (Exception e) {
-			classfound = false;
-		}
-		if (classfound) {
-			return Response.ok(className).build();
-		}
-		return Response.status(Status.NOT_FOUND).build();
-	}
-	
-	/**
-	 * Clears the entire cache.
-	 * @return Status Code 200 and "cleared" text if clear succeeded, 404 if it didn't.
-	 */
-	@DELETE
-	@Path("/cache")
-	public Response clearAllCaches() {
-		CacheManager.MANAGER.clearLocalCacheOnly();
-		return Response.ok("cleared").build();
-	}
-	
-	/**
-	 * Closes and resets the EMF.
-	 * @return Status Code 200 and "clearedEMF" text if reset succeeded, 404 if it didn't.
-	 */
-	@DELETE
-	@Path("/emf")
-	public Response clearEMF() {
-		CacheManager.MANAGER.resetLocalEMF();
-		return Response.ok("clearedEMF").build();
-	}
+@DELETE
+@Path("/cache")
+public  Response clearAllCaches() {
+cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController threadMonitoringController = cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController.getInstance();
+cipm.consistency.bridge.monitoring.controller.ServiceParameters monitoringServiceParameters = new  cipm.consistency.bridge.monitoring.controller.ServiceParameters();
+threadMonitoringController.enterService("_p_6A4QsxEey1ZNZ-8Luqpw", this, monitoringServiceParameters);
+try {
+threadMonitoringController.enterInternalAction("_p_8dIgsxEey1ZNZ-8Luqpw", "_oro4gG3fEdy4YaaT-RYrLQ");
+CacheManager.MANAGER.clearLocalCacheOnly();
+threadMonitoringController.exitInternalAction("_p_8dIgsxEey1ZNZ-8Luqpw", "_oro4gG3fEdy4YaaT-RYrLQ");
+threadMonitoringController.enterInternalAction("_p_8dIwsxEey1ZNZ-8Luqpw", "_oro4gG3fEdy4YaaT-RYrLQ");
+Response longAndUniqueNameToAvoidDuplicationsAndCompilationErrors1630506949299007276867296009019 = Response.ok("cleared").build();
+threadMonitoringController.exitInternalAction("_p_8dIwsxEey1ZNZ-8Luqpw", "_oro4gG3fEdy4YaaT-RYrLQ");
+return longAndUniqueNameToAvoidDuplicationsAndCompilationErrors1630506949299007276867296009019;
+}
+finally {
+threadMonitoringController.exitService("_p_6A4QsxEey1ZNZ-8Luqpw");
+}
+}
+
+@DELETE
+@Path("/emf")
+public  Response clearEMF() {
+cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController threadMonitoringController = cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController.getInstance();
+cipm.consistency.bridge.monitoring.controller.ServiceParameters monitoringServiceParameters = new  cipm.consistency.bridge.monitoring.controller.ServiceParameters();
+threadMonitoringController.enterService("_qAG1MQsxEey1ZNZ-8Luqpw", this, monitoringServiceParameters);
+try {
+threadMonitoringController.enterInternalAction("_qAIDVwsxEey1ZNZ-8Luqpw", "_oro4gG3fEdy4YaaT-RYrLQ");
+CacheManager.MANAGER.resetLocalEMF();
+threadMonitoringController.exitInternalAction("_qAIDVwsxEey1ZNZ-8Luqpw", "_oro4gG3fEdy4YaaT-RYrLQ");
+threadMonitoringController.enterInternalAction("_qAIDWAsxEey1ZNZ-8Luqpw", "_oro4gG3fEdy4YaaT-RYrLQ");
+Response longAndUniqueNameToAvoidDuplicationsAndCompilationErrors16305069492990043241771193659817 = Response.ok("clearedEMF").build();
+threadMonitoringController.exitInternalAction("_qAIDWAsxEey1ZNZ-8Luqpw", "_oro4gG3fEdy4YaaT-RYrLQ");
+return longAndUniqueNameToAvoidDuplicationsAndCompilationErrors16305069492990043241771193659817;
+}
+finally {
+threadMonitoringController.exitService("_qAG1MQsxEey1ZNZ-8Luqpw");
+}
+}
+
 }
