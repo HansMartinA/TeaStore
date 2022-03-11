@@ -1,111 +1,125 @@
-/**
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package tools.descartes.teastore.image.rest;
 
 import java.util.HashMap;
 import java.util.stream.Collectors;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-
 import tools.descartes.teastore.entities.ImageSize;
 import tools.descartes.teastore.image.ImageProvider;
 import tools.descartes.teastore.image.setup.SetupController;
-
-/**
- * The image provider REST endpoints for querying and controlling the image provider service.
- * @author Norbert Schmitt
- */
 @Path("image")
-@Produces({ "application/json" })
-@Consumes({ "application/json" })
+@Produces({"application/json"})
+@Consumes({"application/json"})
 public class ImageProviderEndpoint {
+@POST
+@Path("getProductImages")
+public  Response getProductImages(HashMap<Long, String> images) {
+cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController threadMonitoringController = cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController.getInstance();
+cipm.consistency.bridge.monitoring.controller.ServiceParameters monitoringServiceParameters = new  cipm.consistency.bridge.monitoring.controller.ServiceParameters();
+monitoringServiceParameters.addValue("images", images);
+threadMonitoringController.enterService("_1xiuwPhgEeudoMIzjEj1xQ", this, monitoringServiceParameters);
+try {
+threadMonitoringController.enterInternalAction("_1xtG0PhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+Response longAndUniqueNameToAvoidDuplicationsAndCompilationErrors16470086662630012150266804203014 = Response.ok().entity(ImageProvider.IP.getProductImages(images.entrySet().parallelStream().collect(Collectors.toMap(e -> e.getKey(), e -> ImageSize.parseImageSize(e.getValue()))))).build();
+threadMonitoringController.exitInternalAction("_1xtG0PhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+return longAndUniqueNameToAvoidDuplicationsAndCompilationErrors16470086662630012150266804203014;
+}
+finally {
+threadMonitoringController.exitService("_1xiuwPhgEeudoMIzjEj1xQ");
+}
+}
 
-  /**
-   * Queries the image provider for the given product IDs in the given size, provided as strings.
-   * @param images Map of product IDs and the corresponding image size as string.
-   * @return Map of product IDs and the image data as base64 encoded string.
-   */
-  @POST
-  @Path("getProductImages")
-  public Response getProductImages(HashMap<Long, String> images) {
-    return Response.ok()
-        .entity(ImageProvider.IP.getProductImages(images.entrySet().parallelStream().collect(
-            Collectors.toMap(e -> e.getKey(), e -> ImageSize.parseImageSize(e.getValue())))))
-        .build();
-  }
+@POST
+@Path("getWebImages")
+public  Response getWebUIImages(HashMap<String, String> images) {
+cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController threadMonitoringController = cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController.getInstance();
+cipm.consistency.bridge.monitoring.controller.ServiceParameters monitoringServiceParameters = new  cipm.consistency.bridge.monitoring.controller.ServiceParameters();
+monitoringServiceParameters.addValue("images", images);
+threadMonitoringController.enterService("_1zw8UPhgEeudoMIzjEj1xQ", this, monitoringServiceParameters);
+try {
+threadMonitoringController.enterInternalAction("_10bDoPhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+Response longAndUniqueNameToAvoidDuplicationsAndCompilationErrors164700866626400004301943072362868 = Response.ok().entity(ImageProvider.IP.getWebUIImages(images.entrySet().parallelStream().collect(Collectors.toMap(e -> e.getKey(), e -> ImageSize.parseImageSize(e.getValue()))))).build();
+threadMonitoringController.exitInternalAction("_10bDoPhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+return longAndUniqueNameToAvoidDuplicationsAndCompilationErrors164700866626400004301943072362868;
+}
+finally {
+threadMonitoringController.exitService("_1zw8UPhgEeudoMIzjEj1xQ");
+}
+}
 
-  /**
-   * Queries the image provider for the given web interface image names in the given size, provided as strings.
-   * @param images Map of web interface image names and the corresponding image size as string.
-   * @return Map of web interface image names and the image data as base64 encoded string.
-   */
-  @POST
-  @Path("getWebImages")
-  public Response getWebUIImages(HashMap<String, String> images) {
-    return Response.ok()
-        .entity(ImageProvider.IP.getWebUIImages(images.entrySet().parallelStream().collect(
-            Collectors.toMap(e -> e.getKey(), e -> ImageSize.parseImageSize(e.getValue())))))
-        .build();
-  }
+@GET
+@Path("regenerateImages")
+public  Response regenerateImages() {
+cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController threadMonitoringController = cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController.getInstance();
+cipm.consistency.bridge.monitoring.controller.ServiceParameters monitoringServiceParameters = new  cipm.consistency.bridge.monitoring.controller.ServiceParameters();
+threadMonitoringController.enterService("_13ovsPhgEeudoMIzjEj1xQ", this, monitoringServiceParameters);
+try {
+threadMonitoringController.enterInternalAction("_14Ie8PhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+SetupController.SETUP.reconfiguration();
+Response longAndUniqueNameToAvoidDuplicationsAndCompilationErrors1647008666265005569582589994058 = Response.ok().build();
+threadMonitoringController.exitInternalAction("_14Ie8PhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+return longAndUniqueNameToAvoidDuplicationsAndCompilationErrors1647008666265005569582589994058;
+}
+finally {
+threadMonitoringController.exitService("_13ovsPhgEeudoMIzjEj1xQ");
+}
+}
 
-  /**
-   * Signals the image provider to regenerate all product images. This is usually necessary if the product database 
-   * changed.
-   * @return Returns status code 200.
-   */
-  @GET
-  @Path("regenerateImages")
-  public Response regenerateImages() {
-    SetupController.SETUP.reconfiguration();
-    return Response.ok().build();
-  }
+@GET
+@Path("finished")
+public  Response isFinished() {
+cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController threadMonitoringController = cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController.getInstance();
+cipm.consistency.bridge.monitoring.controller.ServiceParameters monitoringServiceParameters = new  cipm.consistency.bridge.monitoring.controller.ServiceParameters();
+threadMonitoringController.enterService("_16-XkPhgEeudoMIzjEj1xQ", this, monitoringServiceParameters);
+try {
+threadMonitoringController.enterInternalAction("_17dfwPhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+Response longAndUniqueNameToAvoidDuplicationsAndCompilationErrors1647008666267003261946979843129 = Response.ok().entity(SetupController.SETUP.isFinished()).build();
+threadMonitoringController.exitInternalAction("_17dfwPhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+return longAndUniqueNameToAvoidDuplicationsAndCompilationErrors1647008666267003261946979843129;
+}
+finally {
+threadMonitoringController.exitService("_16-XkPhgEeudoMIzjEj1xQ");
+}
+}
 
-  /**
-   * Checks if the setup of the image provider and image generation has finished.
-   * @return Returns true if the setup is finished.
-   */
-  @GET
-  @Path("finished")
-  public Response isFinished() {
-    return Response.ok().entity(SetupController.SETUP.isFinished()).build();
-  }
+@GET
+@Path("state")
+@Produces({"text/plain"})
+public  Response getState() {
+cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController threadMonitoringController = cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController.getInstance();
+cipm.consistency.bridge.monitoring.controller.ServiceParameters monitoringServiceParameters = new  cipm.consistency.bridge.monitoring.controller.ServiceParameters();
+threadMonitoringController.enterService("_1-HLIPhgEeudoMIzjEj1xQ", this, monitoringServiceParameters);
+try {
+threadMonitoringController.enterInternalAction("_1-vdQPhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+Response longAndUniqueNameToAvoidDuplicationsAndCompilationErrors16470086662680020538817325592462 = Response.ok().entity(SetupController.SETUP.getState()).build();
+threadMonitoringController.exitInternalAction("_1-vdQPhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+return longAndUniqueNameToAvoidDuplicationsAndCompilationErrors16470086662680020538817325592462;
+}
+finally {
+threadMonitoringController.exitService("_1-HLIPhgEeudoMIzjEj1xQ");
+}
+}
 
-  /**
-   * Checks the current state, configuration settings, number of images, cache size, etc., of the image provider.
-   * @return Returns a string containing the current state and configuration.
-   */
-  @GET
-  @Path("state")
-  @Produces({ "text/plain" })
-  public Response getState() {
-    return Response.ok().entity(SetupController.SETUP.getState()).build();
-  }
-
-  /**
-   * Sets the cache size to the given value.
-   * @param cacheSize The new cache size in bytes. Cache size must be positive.
-   * @return True if the cache size was set successfully, otherwise false.
-   */
-  @POST
-  @Path("setCacheSize")
-  public Response setCacheSize(long cacheSize) {
-    return Response.ok().entity(SetupController.SETUP.setCacheSize(cacheSize)).build();
-  }
+@POST
+@Path("setCacheSize")
+public  Response setCacheSize(long cacheSize) {
+cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController threadMonitoringController = cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController.getInstance();
+cipm.consistency.bridge.monitoring.controller.ServiceParameters monitoringServiceParameters = new  cipm.consistency.bridge.monitoring.controller.ServiceParameters();
+monitoringServiceParameters.addValue("cacheSize", cacheSize);
+threadMonitoringController.enterService("_2CYAEPhgEeudoMIzjEj1xQ", this, monitoringServiceParameters);
+try {
+threadMonitoringController.enterInternalAction("_2DGY0PhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+Response longAndUniqueNameToAvoidDuplicationsAndCompilationErrors164700866626900698274984812135 = Response.ok().entity(SetupController.SETUP.setCacheSize(cacheSize)).build();
+threadMonitoringController.exitInternalAction("_2DGY0PhgEeudoMIzjEj1xQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+return longAndUniqueNameToAvoidDuplicationsAndCompilationErrors164700866626900698274984812135;
+}
+finally {
+threadMonitoringController.exitService("_2CYAEPhgEeudoMIzjEj1xQ");
+}
+}
 
 }
