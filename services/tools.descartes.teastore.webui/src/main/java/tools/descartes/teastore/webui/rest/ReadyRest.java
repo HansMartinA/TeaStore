@@ -1,43 +1,27 @@
-/**
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package tools.descartes.teastore.webui.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-
-/**
- * Rest endpoint for the store cart.
- * 
- * @author Simon
- */
 @Path("ready")
-@Produces({ "application/json" })
+@Produces({"application/json"})
 public class ReadyRest {
-
-
-  /**
-   * This methods checks, if the service is ready.
-   * 
-   * @return True, if recommender is ready; false, if not.
-   */
-  @GET
-  @Path("isready")
-  public Response isReady() {
-    return Response.ok(String.valueOf(true)).build();
-  }
+@GET
+@Path("isready")
+public  Response isReady() {
+cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController threadMonitoringController = cipm.consistency.bridge.monitoring.controller.ThreadMonitoringController.getInstance();
+cipm.consistency.bridge.monitoring.controller.ServiceParameters monitoringServiceParameters = new  cipm.consistency.bridge.monitoring.controller.ServiceParameters();
+threadMonitoringController.enterService("_yEgl4PhsEeuIqOQIQEQ0aQ", this, monitoringServiceParameters);
+try {
+threadMonitoringController.enterInternalAction("_yEjCIPhsEeuIqOQIQEQ0aQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+Response longAndUniqueNameToAvoidDuplicationsAndCompilationErrors16472034342730022180905276042018 = Response.ok(String.valueOf(true)).build();
+threadMonitoringController.exitInternalAction("_yEjCIPhsEeuIqOQIQEQ0aQ", "_oro4gG3fEdy4YaaT-RYrLQ");
+return longAndUniqueNameToAvoidDuplicationsAndCompilationErrors16472034342730022180905276042018;
+}
+finally {
+threadMonitoringController.exitService("_yEgl4PhsEeuIqOQIQEQ0aQ");
+}
+}
 
 }
